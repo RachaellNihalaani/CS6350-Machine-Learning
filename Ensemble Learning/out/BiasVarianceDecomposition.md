@@ -1,4 +1,4 @@
-Code Output:
+## Code Output:
 
 For Single Decision Trees - 
 Bias =  0.33962424
@@ -11,6 +11,6 @@ Variance = 0.3105264768000003
 General Squared Error =  0.6617340768000003
 
 
-Comparison of the Single Tree Learner and the Bagger Tree Learner:
+## Comparison of the Single Tree Learner and the Bagger Tree Learner:
 Comparing the results of the two, we can conclude that ..............
 This difference is caused by ............
