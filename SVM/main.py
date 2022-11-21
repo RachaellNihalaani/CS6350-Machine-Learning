@@ -2,6 +2,14 @@ import numpy as np
 from SVM import PrimalSVM, DualSVM, DualKernelPerceptron
 import matplotlib.pyplot as plt
 
+# function to load the training and testing data
+def load_data(folder_path):
+    train = folder_path + '/train.csv'
+    test = folder_path + '/test.csv'
+    train_X, train_y = load_csv(train)
+    test_X, test_y = load_csv(test)
+    return train_X, train_y, test_X, test_y
+
 
 # function to split csv file into data and labels
 def load_csv(file_name):
@@ -23,23 +31,8 @@ def load_csv(file_name):
     return data, labels
 
 
-# function to load the training and testing data
-def load_data(folder_path):
-    train = folder_path + '/train.csv'
-    test = folder_path + '/test.csv'
-    train_X, train_y = load_csv(train)
-    test_X, test_y = load_csv(test)
-    return train_X, train_y, test_X, test_y
-
-
 # function to convert labels from {0,1} to {-1,1}
 def convert_labels(labels):
-    # new_labels = []
-    # for label in labels:
-    #     if int(label) <= 0:
-    #         new_labels.append(-1)
-    #     else:
-    #         new_labels.append(1)
     new_labels = [-1 if int(label) <= 0 else 1 for label in labels]
     return np.array(new_labels)
 
@@ -65,7 +58,6 @@ def SVM_primal():
     print('\nSchedule A of learning rate')
     svm_models_ar_a = []
     for c in C:
-        # print('-------------------------------------------------------------------------')
         primal_svm_a = PrimalSVM(C=c,
                                  learning_rate_schedule='A',
                                  nepochs=100,
@@ -88,7 +80,6 @@ def SVM_primal():
 
     svm_models_ar_b = []
     for c in C:
-        # print('-------------------------------------------------------------------------')
         primal_svm_b = PrimalSVM(C=c,
                                  learning_rate_schedule='B',
                                  nepochs=100,
@@ -105,15 +96,10 @@ def SVM_primal():
                   f'Training Error = {train_error}\n'
                   f'Test Error = {test_error}\n')
 
-    # Part C -
-    #  Comparing the difference of i) model parameters
-    #                              ii) train errors
-    #                              iii) test errors
-    #  for each values of C
+    # Part C - Comparing the differences for each value of C
     print('\n\nDifferences between Schedules A and B')
 
     for idx, C_val in enumerate(C):
-        # print('-------------------------------------------------------------------------')
         print(f'For C = {C_val:.4f}, ')
         diff_train = svm_models_ar_a[idx].train_error - svm_models_ar_b[idx].train_error
         diff_test = svm_models_ar_a[idx].test_error - svm_models_ar_b[idx].test_error
