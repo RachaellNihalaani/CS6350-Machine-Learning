@@ -216,7 +216,7 @@ def SVM_dual():
 
     # for C = 500/873, model idx is 1
     print('\n\nNumber of Overlapped Support Vectors between consecutive gamma values for C = 500/873')
-    svm_model = ds_gk_c_output[1]
+    svm_model = ds_gk_output[1]
 
     for i in range(0, len(svm_model) - 1):
         model_a = svm_model[i]
@@ -243,12 +243,12 @@ def Perceptron_dual():
 
     for g in gamma_values:
         # Calling the class from SVM.py (dkp = dual kernel perceptron)
-        dkp = DualKernelPerceptron(train_data=train_X, train_labels=train_y, gamma=g)
+        dkp = DualKernelPerceptron(X_train=train_X, y_train=train_y, gamma=g, epochs=10)
         dkp.train()
 
         # Calculate error using evaluate function and store
-        train_error = dkp.calc_error(data=train_X, labels=train_y)
-        test_error = dkp.calc_error(data=test_X, labels=test_y)
+        train_error = dkp.calc_error(X=train_X, y_target=train_y)
+        test_error = dkp.calc_error(X=test_X, y_target=test_y)
         dkp.store_errors(train_error, test_error)
 
         dkp_output.append(dkp)
