@@ -1,0 +1,1 @@
+The Income Level Prediction project is a classification problem with the prediction task to determine whether a person makes over 50K a year given the census information. This project has been developed for CS5350/6350 Machine Learning in Fall 2022 at the University of Utah.
